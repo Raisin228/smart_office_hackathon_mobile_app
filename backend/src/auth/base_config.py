@@ -17,7 +17,7 @@ def get_jwt_strategy() -> JWTStrategy:
     return JWTStrategy(secret=JWT_SECRET, lifetime_seconds=3600 * 24, algorithm='HS256')
 
 
-# создаём auth backend (объект который объединяет транспорт и стратегию)
+# создаём auth backend (объект, который объединяет транспорт и стратегию)
 auth_backend = AuthenticationBackend(
     name="jwt",
     transport=bearer_transport,

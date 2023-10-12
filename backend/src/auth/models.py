@@ -13,9 +13,10 @@ class user(SQLAlchemyBaseUserTable[int], Base):
     __tablename__ = 'user'
 
     id: int = Column(Integer, primary_key=True)
-    first_name: str = Column(String, nullable=True)
-    last_name: str = Column(String, nullable=True)
-    username: str = Column(String, unique=True, nullable=False)
+    last_name: str = Column(String, nullable=False)
+    first_name: str = Column(String, nullable=False)
+    patronymic: str = Column(String, nullable=False)
+    username: str = Column(String, nullable=False, default='Anonymous')
 
     # default поля
     email: str = Column(String(length=320), unique=True, index=True, nullable=False)
