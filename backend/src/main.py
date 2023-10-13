@@ -2,6 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from auth.base_config import auth_backend, fastapi_users
 from auth.schemas import UserRead, UserCreate
+from profile.router import profile_router
 
 # создание backend
 app = FastAPI(
@@ -22,6 +23,9 @@ app.include_router(
     prefix="/auth",
     tags=["Auth"],
 )
+
+# (роутер) для работы с профилем пользователей
+app.include_router(profile_router)
 
 
 if __name__ == '__main__':

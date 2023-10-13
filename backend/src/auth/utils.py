@@ -1,3 +1,6 @@
+from datetime import datetime
+
+import phonenumbers
 from fastapi import Depends
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -6,6 +9,7 @@ from email_validator import validate_email
 
 from auth.models import user
 from database import get_async_session
+
 
 SPEC_SYMBOLS = "!@#$%&*()-_+=;:,./?|`~[]{}^'<>~"
 NUMBERS = '0123456789'
@@ -31,4 +35,32 @@ def is_valid_email(email: str) -> bool:
             return True
     except:
         return False
+
+
+def is_valid_birth(value: str) -> bool:
+    """Валидация дня рождения"""
+    try:
+        birthday = datetime.strptime(value, '%Y-%m-%d')
+        today = datetime.today()
+        age = today.year - birthday.year - ((today.month, today.day) < (birthday.month, birthday.day))
+        if age < 0 or age > 120:
+            raise ValueError('Invalid birthday')
+    except ValueError:
+        return False
+    return True
+
+
+def is_valid_phone(v: str) -> bool:
+    """Валидация номера телефона"""
+    try:
+        parsed_number = phonenumbers.parse(v, None)
+        if (not phonenumbers.is_valid_number(parsed_number) or
+                any(map(lambda ch: ch.lower() in ascii_lowercase, v))):
+            return False
+    except phonenumbers.phonenumberutil.NumberParseException:
+        return False
+    return True
+
+
+
 
