@@ -3,6 +3,8 @@ from fastapi import FastAPI
 from auth.base_config import auth_backend, fastapi_users
 from auth.schemas import UserRead, UserCreate
 from profile.router import profile_router
+from wishes_section.router import wishes_router
+from tasks.router import tasks_router
 
 # создание backend
 app = FastAPI(
@@ -27,6 +29,11 @@ app.include_router(
 # (роутер) для работы с профилем пользователей
 app.include_router(profile_router)
 
+# (роутер) для анонимного раздела с пожеланиями
+app.include_router(wishes_router)
+
+# (роутер) для назначения списка задач
+app.include_router(tasks_router)
 
 if __name__ == '__main__':
     uvicorn.run('main:app', port=8001)

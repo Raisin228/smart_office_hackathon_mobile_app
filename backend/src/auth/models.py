@@ -6,7 +6,7 @@ from sqlalchemy.orm import declarative_base
 
 # мета данные следят за разницей между моделью и таблицей в бд -> далее помогает делать ревизию и миграции
 metadata = MetaData()
-Base = declarative_base()
+Base = declarative_base(metadata=metadata)
 
 
 class user(SQLAlchemyBaseUserTable[int], Base):
@@ -25,6 +25,8 @@ class user(SQLAlchemyBaseUserTable[int], Base):
     position: str = Column(String(length=255), nullable=True)
     experience_in_company: int = Column(Integer, nullable=True)
     phone_number: str = Column(String, nullable=True)
+    about_me: str = Column(String, nullable=True)
+    work_place: str = Column(String, nullable=True)
 
     email: str = Column(String(length=320), unique=True, index=True, nullable=False)
     hashed_password: str = Column(String(length=1024), nullable=False)

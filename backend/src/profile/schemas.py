@@ -16,16 +16,18 @@ class GetUserProfile(BaseModel):
     position: Optional[str] = None
     experience_in_company: Optional[int] = None
     phone_number: Optional[str] = None
+    about_me: Optional[str] = None
+    work_place: Optional[str] = None
 
 
-class GetUserProfileInfo(BaseModel):
+class UpdateUserProfileInfo(BaseModel):
     """Валидация данных запросе на изменение profile"""
     description: str
 
     @validator('description')
     def validate_desc(cls, v):
-        if v not in ['на больничном', 'в отпуске']:
-            raise ValueError('desc must be either (на больничном) or (в отпуске)')
+        if v not in ['на больничном', 'в отпуске', 'работает']:
+            raise ValueError('desc must be either (на больничном) or (в отпуске) or (работает)')
         return v
 
     birthday: str
@@ -46,3 +48,6 @@ class GetUserProfileInfo(BaseModel):
         if not is_valid_phone(v):
             raise ValueError('Incorrect phone number format. The phone must be in the format +7807411677')
         return v
+
+    about_me: str = Field(max_length=1000)
+    work_place: str = Field(max_length=1000)

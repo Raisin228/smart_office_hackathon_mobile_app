@@ -9,7 +9,9 @@ from alembic import context
 sys.path.append(os.path.join(sys.path[0], 'src'))
 
 from config import DB_USER, DB_PASS, DB_HOST, DB_PORT, DB_NAME
-from auth.models import metadata
+from auth.models import metadata as auth_meta
+from wishes_section.models import metadata as wish_meta
+from tasks.models import metadata as task_meta
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -32,7 +34,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = [metadata]
+target_metadata = [auth_meta, wish_meta, task_meta]
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

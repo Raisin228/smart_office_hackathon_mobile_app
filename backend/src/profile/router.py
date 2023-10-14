@@ -2,12 +2,13 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select, update
 
 from bad_responses import ErrorOrSucess
+from config import STATIC_ACCESS_KEY
 from database import get_async_session
 from auth.models import user
 from auth.base_config import fastapi_users
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from profile.schemas import GetUserProfile, GetUserProfileInfo
+from profile.schemas import GetUserProfile, UpdateUserProfileInfo
 
 current_user = fastapi_users.current_user()
 # создаём новый роутер
@@ -47,6 +48,8 @@ async def get_user_profile(need_user_id: int, person: user = Depends(current_use
         ans['position'] = user_obj.position
         ans['experience_in_company'] = user_obj.experience_in_company
         ans['phone_number'] = user_obj.phone_number
+        ans['about_me'] = user_obj.about_me
+        ans['work_place'] = user_obj.work_place
         return ans
     raise HTTPException(status_code=400, detail="User doesn't exist")
 
@@ -54,7 +57,7 @@ async def get_user_profile(need_user_id: int, person: user = Depends(current_use
 @profile_router.post('/change_profile_info',
                      responses={200: {'model': ErrorOrSucess, 'description': 'OK'},
                                 401: {'model': ErrorOrSucess, 'description': "User doesn't exist"}})
-async def post_user_profile(user_data: GetUserProfileInfo,
+async def post_user_profile(user_data: UpdateUserProfileInfo,
                             person: user = Depends(current_user), session: AsyncSession = Depends(get_async_session)):
     """Изменение информации в профиле пользователя"""
     data_in_dict_format = dict(user_data)
@@ -62,3 +65,25 @@ async def post_user_profile(user_data: GetUserProfileInfo,
     await session.execute(stmt)
     await session.commit()
     raise HTTPException(status_code=200, detail='OK')
+
+
+@profile_router.put('/become_manager', responses={200: {'model': ErrorOrSucess, 'description': 'OK'},
+                                                  401: {'model': ErrorOrSucess, 'description': "User doesn't exist"},
+                                                  400: {'model': ErrorOrSucess, 'description': "Already admin"}})
+async def expand_rights(access_key: str, person: user = Depends(current_user),
+                        session: AsyncSession = Depends(get_async_session)):
+    """Расширить права став администратором (менеджером)"""
+    query = select(user).where(user.id == person.id)
+    stmt = update(user).where(user.id == person.id).values(is_superuser=True)
+    # выдача прав на суперпользователя только в том случае если пользователь ввёл правильный ключ
+    if access_key == STATIC_ACCESS_KEY:
+        data_sup_user = await session.execute(query)
+        # проверяем что пользователь ещё не менеджер
+        if not data_sup_user.fetchall()[0][0].is_superuser:
+            await session.execute(stmt)
+            await session.commit()
+            return {'detail': 'you get more rights access'}
+        else:
+            raise HTTPException(status_code=400, detail="you are already an admin, re-granting rights is not possible")
+    else:
+        raise HTTPException(status_code=400, detail="don't correct access key")
