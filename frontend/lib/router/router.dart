@@ -6,7 +6,7 @@ import '../features/profile/view/profile_screen.dart';
 
 final routes = {
   // профиль - корневой экран
-  "/": (context) => const ProfileScreen(),
+  "/": (context) => ProfileScreen(),
   "/auth": (context) => const AuthScreen(),
   "/signin": (context) => const SignInScreen(),
   "/signup": (context) => const SignUpScreen(),

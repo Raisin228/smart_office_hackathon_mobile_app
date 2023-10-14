@@ -6,19 +6,20 @@ import '../../general_widgets/general_widgets.dart';
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
-  final String firstName = "Адель";
-  final String surName = "Смирнова";
-  final String thirdName = "Александровна";
-  final String email = "example@example.com";
-  final String birthDay = "00.00.00";
+  final String birthDay = "03.07.2004";
   final String workPlace = "Company";
   final String description = "Hello!";
-  final String numPhone = "88888888888";
+  final String numPhone = "8(965) 725-71-50";
   final String position = 'manager';
   final String status = "В работе";
 
+
+
   @override
   Widget build(BuildContext context) {
+    final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
+    final List<String> name = arguments["name"] ?? ['Иванов', 'Иван', 'Иванович'];
+    final String email = arguments["email"];
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -42,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
             SizedBox(height: getScreenSize(context).height * 0.01),
             Center(
               child: Text(
-                '$surName $firstName\n $thirdName',
+                '${name[0]} ${name[1]}\n ${name[2]}',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
