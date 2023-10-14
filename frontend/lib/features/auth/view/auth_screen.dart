@@ -19,28 +19,69 @@ class AuthScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextButton(
-                child: Text(
-                  'Вход',
-                  style: Theme.of(context).textTheme.bodyLarge,
+              Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  boxShadow: [BoxShadow(blurRadius: 30,
+                      color: Colors.white,
+                      spreadRadius: 10)],
                 ),
-                onPressed: () {
-                // Обработка нажатия на кнопку "Вход"
-                  Navigator.of(context).pushNamed("/signin");
-                },
-              ),
-              TextButton(
-                child: Text(
-                  'Регистрация',
-                  style: Theme.of(context).textTheme.bodyLarge,
+                child:
+                const CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.white,
                 ),
-                onPressed: () {
-                  // Обработка нажатия на кнопку "Вход"
-                  Navigator.of(context).pushNamed("/signup");
-                },
               ),
-            ],
-    ),),)
+              const SizedBox(
+                height: 200,
+              ),
+              Container(
+                height: 120,
+                width: 200,
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  border: Border.all(
+                    color: Colors.grey,
+                    width: 1,
+                  ),
+                  borderRadius: const BorderRadius.all(Radius.circular(40))
+                ),
+                child: Column(
+                    children:<Widget> [
+                      TextButton(
+                        child: Text(
+                          'Вход',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        onPressed: () {
+                          // Обработка нажатия на кнопку "Вход"
+                          Navigator.of(context).pushNamed("/signin");
+                        },
+                      ),
+                      const Divider(
+                        indent: 20,
+                        endIndent: 20,
+                        thickness: 1,
+                      ),
+                      TextButton(
+                        child: Text(
+                          'Регистрация',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        onPressed: () {
+                          // Обработка нажатия на кнопку "Вход"
+                          Navigator.of(context).pushNamed("/signup");
+                        },
+                      ),
+                    ],
+                  ),
+                )
+
+              ],
+            ),
+          ),
+        ),
     );
   }
 }

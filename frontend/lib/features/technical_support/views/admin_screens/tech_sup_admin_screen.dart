@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/features/general_widgets/general_widgets.dart';
 
-class Offer {
+class Problem {
   final String title;
+  final String userName;
   final String description;
 
-  Offer({required this.title, required this.description});
+  Problem({required this.title, required this.userName, required this.description});
 }
 
-class ViewOffersScreen extends StatefulWidget {
-  const ViewOffersScreen({super.key});
+class TechSupAdminScreen extends StatefulWidget {
+  const TechSupAdminScreen({super.key});
 
   @override
-  _ViewOffersScreenState createState() => _ViewOffersScreenState();
+  _TechSupAdminScreenState createState() => _TechSupAdminScreenState();
 }
 
-class _ViewOffersScreenState extends State<ViewOffersScreen> {
+class _TechSupAdminScreenState extends State<TechSupAdminScreen> {
   // этот список создается данными из БД
-  List<Offer> offers = [
-    Offer(
-        title: 'Разработать планировщик задач',
+  List<Problem> problems = [
+    Problem(
+        title: 'Сломался компьютер',
+        userName: 'Сальников Кирилл',
         description: 'Нужно сделать в приложении меню'
             ' с выпадающими списками задач и их описанием'),
-    Offer(
+    Problem(
         title: 'Реализация профиля',
+        userName: '15 октября',
         description: 'Сделать профиль пользователя с информацией о нем:'
             'имя, почта, телефон, описание'),
-    Offer(
+    Problem(
         title: 'Анонимный чат',
+        userName: '17 октября',
         description: 'Сделать возможность пользователям анонимно обращаться'
             ' с жалобами или пожеданиями к начальству'),
-    Offer(
+    Problem(
         title: 'Сервис устранения неполадок',
+        userName: '18 октября',
         description: 'Сделать возможным решение технических проблем дистанционно'
             'через приложение. Функционал: получение справок, больничных, отпусков;'
             'решение технических проблем, вызов специалиста'),
@@ -42,7 +47,7 @@ class _ViewOffersScreenState extends State<ViewOffersScreen> {
   @override
   void initState() {
     super.initState();
-    offers.forEach((offer) {
+    problems.forEach((task) {
       descriptionVisibleList.add(false);
     });
   }
@@ -52,10 +57,10 @@ class _ViewOffersScreenState extends State<ViewOffersScreen> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text('Предложения'),
+        title: const Text('Заявки'),
       ),
       body: ListView.builder(
-        itemCount: offers.length,
+        itemCount: problems.length,
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
@@ -66,7 +71,8 @@ class _ViewOffersScreenState extends State<ViewOffersScreen> {
             child: Column(
               children: [
                 ListTile(
-                  title: Text(offers[index].title),
+                  title: Text(problems[index].title),
+                  subtitle: Text(problems[index].userName),
                   trailing: Icon(
                     descriptionVisibleList[index]
                         ? Icons.keyboard_arrow_up
@@ -76,7 +82,7 @@ class _ViewOffersScreenState extends State<ViewOffersScreen> {
                 if (descriptionVisibleList[index])
                   Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: Text(offers[index].description),
+                    child: Text(problems[index].description),
                   ),
                 const Divider(),
               ],

@@ -18,49 +18,71 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-    final List<String> name = arguments["name"] ?? ['Иванов', 'Иван', 'Иванович'];
-    final String email = arguments["email"];
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Colors.white, Colors.blue],
-            begin: Alignment.center,
-            end: Alignment.topCenter,
+    List<String> name = arguments["name"] ?? ['Иванов', 'Иван', 'Иванович'];
+    final String email = arguments["email"] ?? "email";
+
+    if(name.length != 3) {
+      name =  ['Иванов', 'Иван', 'Иванович'];
+    }
+
+      return Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.white, Colors.blue],
+              begin: Alignment.center,
+              end: Alignment.topCenter,
+            ),
           ),
-        ),
-        // height: getScreenSize(context).height,
-        child: Column(
-          // crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: getScreenSize(context).height * 0.01),
-            Center(
-              child: CircleAvatar(
-                radius: getScreenSize(context).width * 0.19,
-                backgroundImage: const AssetImage('assets/test_photo.png'),
+          // height: getScreenSize(context).height,
+          child: Column(
+            // crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: getScreenSize(context).height * 0.01),
+              Center(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                    boxShadow: [BoxShadow(blurRadius: 30,
+                        color: Colors.white,
+                        spreadRadius: 10)],
+                  ),
+                  child:
+                  CircleAvatar(
+                    radius: getScreenSize(context).width * 0.19,
+                    backgroundColor: Colors.white,
+                    // backgroundImage: const AssetImage('assets/test_photo.png'),
+                    child: Text(
+                      name[1][0],
+                      style: const TextStyle(color: Colors.lightGreenAccent,
+                        fontSize: 100,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: getScreenSize(context).height * 0.01),
-            Center(
-              child: Text(
-                '${name[0]} ${name[1]}\n ${name[2]}',
-                style: Theme.of(context).textTheme.bodyLarge,
+              SizedBox(height: getScreenSize(context).height * 0.01),
+              Center(
+                child: Text(
+                  '${name[0]} ${name[1]}\n ${name[2]}',
+                  style: Theme.of(context).textTheme.bodyLarge,
+                ),
               ),
-            ),
-            Center(
-              child: Text(
-                position,
-                style: Theme.of(context).textTheme.bodyMedium,
+              Center(
+                child: Text(
+                  position,
+                  style: Theme.of(context).textTheme.bodyMedium,
+                ),
               ),
-            ),
-            SizedBox(height: getScreenSize(context).height * 0.01),
-            const Divider(
-              indent: 20,
-              endIndent: 20,
-            ),
-            SizedBox(
-              height: getScreenSize(context).height*0.6,
-              child:
+              SizedBox(height: getScreenSize(context).height * 0.01),
+              const Divider(
+                indent: 20,
+                endIndent: 20,
+              ),
+              SizedBox(
+                height: getScreenSize(context).height*0.6,
+                child:
                 ListView(
                     children: <Widget>
                     [buildField("Телефон", numPhone, context),
@@ -70,17 +92,13 @@ class ProfileScreen extends StatelessWidget {
                       buildField('Хобби', description, context),
                       buildField("Статус", status, context),]
                 ),
-            ),
-            const Align(
-              alignment: Alignment.bottomCenter,
-              child:
-                GeneralWidget(),
-            )
-
-          ],
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+        bottomNavigationBar: const GeneralWidget(),
+      );
+    }
   }
 
   Size getScreenSize(BuildContext context) {
@@ -112,4 +130,3 @@ class ProfileScreen extends StatelessWidget {
       ),
     );
   }
-}

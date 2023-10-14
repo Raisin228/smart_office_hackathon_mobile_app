@@ -21,12 +21,15 @@ class GeneralWidget extends StatelessWidget {
             icon: const Icon(Icons.calendar_today),
             onPressed: () {
               // Обработчик нажатия на кнопку "Планировщик"
+              Navigator.of(context).pushNamed("/task_manager_admin");
             },
           ),
           IconButton(
             icon: const Icon(Icons.error_outline),
             onPressed: () {
               // Обработчик нажатия на кнопку "Неполадки"
+              // ДОБАВИТЬ ПРОВЕРКУ НА АДМИНА
+              Navigator.of(context).pushNamed("/tech_sup_list");
             },
           ),
           IconButton(
@@ -40,6 +43,8 @@ class GeneralWidget extends StatelessWidget {
             icon: const Icon(Icons.chat),
             onPressed: () {
               // Обработчик нажатия на кнопку "Чат"
+              // ДОБАВИТЬ ОБРАБОТКУ РОЛИ ПОЛЬЗОВАТЕЛЯ
+              Navigator.of(context).pushNamed("/anonim_offer_create");
             },
           ),
         ],

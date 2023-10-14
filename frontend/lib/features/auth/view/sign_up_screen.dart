@@ -15,11 +15,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Colors.white, Colors.blue],
+            begin: Alignment.center,
+            end: Alignment.topCenter,
+          ),
+        ),
         padding: const EdgeInsets.all(24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                shape: BoxShape.circle,
+                boxShadow: [BoxShadow(blurRadius: 30,
+                    color: Colors.white,
+                    spreadRadius: 10)],
+              ),
+              child:
+              const CircleAvatar(
+                radius: 60,
+                backgroundColor: Colors.white,
+              ),
+            ),
+
             TextFormField(
               controller: emailController,
               decoration: const InputDecoration(
