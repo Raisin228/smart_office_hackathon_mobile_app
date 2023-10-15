@@ -66,17 +66,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(height: 24.0),
             TextButton(
               child: const Text('Отправить'),
-              onPressed: () {
+              onPressed: () async {
                 final email = emailController.text;
                 final password = passwordController.text;
                 final userName = nameController.text.split(" ");
 
+                // информация для запросов
+                final signUpData = {
+                  "email": email,
+                  "password": password,
+                  "first_name": userName[1],
+                  "last_name": userName[0],
+                  "patronymic": userName[2]
+                };
+                Navigator.of(context).pushNamed("/", arguments: signUpData);
                 // здесь происходит проверка на правильность пароля/логина
                 // если проверка пройдена успешно, то
-                Navigator.of(context).pushNamed("/", arguments: {
-                  "name": userName,
-                  "email": email
-                });
+
               },
             ),
           ],

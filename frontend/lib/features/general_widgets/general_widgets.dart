@@ -29,7 +29,7 @@ class GeneralWidget extends StatelessWidget {
             onPressed: () {
               // Обработчик нажатия на кнопку "Неполадки"
               // ДОБАВИТЬ ПРОВЕРКУ НА АДМИНА
-              Navigator.of(context).pushNamed("/tech_sup_list");
+              Navigator.of(context).pushNamed("/tech_sup_list_admin");
             },
           ),
           IconButton(
@@ -44,7 +44,7 @@ class GeneralWidget extends StatelessWidget {
             onPressed: () {
               // Обработчик нажатия на кнопку "Чат"
               // ДОБАВИТЬ ОБРАБОТКУ РОЛИ ПОЛЬЗОВАТЕЛЯ
-              Navigator.of(context).pushNamed("/anonim_offer_create");
+              Navigator.of(context).pushNamed("/anonim_offer_admin");
             },
           ),
         ],

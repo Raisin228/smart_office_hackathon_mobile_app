@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/theme/theme.dart';
-
 import '../../general_widgets/general_widgets.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -18,8 +16,13 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final arguments = (ModalRoute.of(context)?.settings.arguments ?? <String, dynamic>{}) as Map;
-    List<String> name = arguments["name"] ?? ['Иванов', 'Иван', 'Иванович'];
-    final String email = arguments["email"] ?? "email";
+
+    List<String> name = [
+      arguments["last_name"] ?? "Иванов",
+      arguments["first_name"] ?? "Иван",
+      arguments["patronymic"] ?? "Иванович"
+    ];
+    final email = arguments["email"] ?? "email";
 
     if(name.length != 3) {
       name =  ['Иванов', 'Иван', 'Иванович'];

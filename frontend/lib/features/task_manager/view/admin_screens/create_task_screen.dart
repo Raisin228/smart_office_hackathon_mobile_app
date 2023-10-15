@@ -68,10 +68,14 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
               ),
             ),
             const SizedBox(height: 16.0),
-            TextButton(
-              onPressed: _createTask,
-              child: const Text('Создать'),
-            ),
+            Center(child:
+                TextButton(
+                  onPressed: _createTask,
+                  child: Text('Создать',
+                      style: Theme.of(context).textTheme.bodyLarge),
+                ),
+              )
+
           ],
         ),
       ),

@@ -45,10 +45,15 @@ class _SendOfferScreenState extends State<SendOfferScreen> {
               ),
             ),
             const SizedBox(height: 16.0),
-            TextButton(
-              onPressed: _createOffer,
-              child: const Text('Отправить'),
-            ),
+            Center(child:
+              TextButton(
+                onPressed: _createOffer,
+                child: const Text(
+                  'Отправить',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ),
+            )
           ],
         ),
       ),

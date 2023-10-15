@@ -17,20 +17,20 @@ final darkTheme = ThemeData(
     textTheme: const TextTheme(
       // заголовки в баре
       bodyLarge: TextStyle(
-        color: Colors.black,
+        color: Colors.black45,
         fontWeight: FontWeight.w700,
         fontSize: 25,
       ),
       // заголовки в теле
       bodyMedium: TextStyle(
-        color: Colors.black,
+        color: Colors.grey,
         fontWeight: FontWeight.w900,
         fontSize: 20,
 
       ),
       // обычный текст
       bodySmall: TextStyle(
-        color: Colors.black,
+        color: Colors.grey,
         fontWeight: FontWeight.w700,
         fontSize: 15,
       ),
