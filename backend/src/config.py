@@ -11,3 +11,4 @@ DB_NAME = os.environ.get('DB_NAME')
 
 MY_JWT_SECRET = os.environ.get('JWT_SECRET')
 SECRET_USER_MANAGER = os.environ.get('SECRET_USER_MANAGER')
+STATIC_ACCESS_KEY = os.environ.get('STATIC_ACCESS_KEY')
