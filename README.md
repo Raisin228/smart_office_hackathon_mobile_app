@@ -83,7 +83,7 @@ STATIC_ACCESS_KEY=bigboss
 
 ---
 
-<img src="https://github.com/Raisin228/smart_office_hackathon_mobile_app/blob/main/images/solution_architecture.png">
+<img src="https://github.com/Raisin228/smart_office_hackathon_mobile_app/blob/main/images/archit.png">
 
 ## Скрин касты
 
