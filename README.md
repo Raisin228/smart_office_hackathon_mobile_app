@@ -33,29 +33,35 @@
 ## Запуск 
 
 ---
-
-* Клонируйте репозиторий себе на локальную машину `git clone ссылка на репозиторий`
-* Перейдите в директорию src и запустите smart_office_hackaton_mobile_app/backend 
-* Создайте виртуальное окружение `python -m venv venv`
-* Активируйте окружение `venv/Scripts/activate`
-* Установите все зависимости из requirements.txt `pip install -r requirements.txt`
-* Создайте файл .env следующего вида 
-```
-DB_USER=postgres
-DB_PASS=postgres
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=smart_office
-JWT_SECRET=i2qkj4YyNnfLheaEHciRzPxxBDHvcb26ym87UNE93U0Ri360KyNFCgzjTGQZg2o3yttYZec5dRgDjXikzix5oT4kwmNE1jUsnb6M
-SECRET_USER_MANAGER=3EvNG2CshQbOLqRRSV0V6wFmjVNDea
-STATIC_ACCESS_KEY=bigboss 
-```
-* Создайте файл алембика `alembic init migrations` После чего создайте миграции `alembic migrations -autogenerate`
-Проведите миграцию `alembic upgrade 96c8d8482a4f`
-* Перейдите в src. Сделайте запуск локального сервера `uvicorn main:app --reload`
-* Можете локально тестировать работу backend
-
-**P.S сервер backend развёрнут на хостинге вот ссылка чтобы его потыкать: https://fastapi-test-kegi.onrender.com/docs**
+- Запуск mobile frontend
+    * Клонируйте репозиторий себе на локальную машину `git clone ссылка на репозиторий`
+    * Перейдите в директорию smart_office_hackaton_mobile_app/frontend/lib
+    * Введите команду `flutter pub get`
+    * Запустите файл main
+    P.S для запуска требуется Android Studio с эмуляциями устройств
+- Запуск backend
+  * Клонируйте репозиторий себе на локальную машину `git clone ссылка на репозиторий`
+  * Перейдите в smart_office_hackaton_mobile_app/backend/src 
+  * Создайте виртуальное окружение `python -m venv venv`
+  * Активируйте окружение `venv/Scripts/activate`
+  * Установите все зависимости из requirements.txt `pip install -r requirements.txt`
+  * Создайте файл .env следующего вида 
+  ```
+  DB_USER=postgres
+  DB_PASS=postgres
+  DB_HOST=localhost
+  DB_PORT=5432
+  DB_NAME=smart_office
+  JWT_SECRET=i2qkj4YyNnfLheaEHciRzPxxBDHvcb26ym87UNE93U0Ri360KyNFCgzjTGQZg2o3yttYZec5dRgDjXikzix5oT4kwmNE1jUsnb6M
+  SECRET_USER_MANAGER=3EvNG2CshQbOLqRRSV0V6wFmjVNDea
+  STATIC_ACCESS_KEY=bigboss 
+  ```
+  * Создайте файл алембика `alembic init migrations` После чего создайте миграции `alembic migrations -autogenerate`
+  Проведите миграцию `alembic upgrade 96c8d8482a4f`
+  * Перейдите в src. Сделайте запуск локального сервера `uvicorn main:app --reload`
+  * Можете локально тестировать работу backend
+  * Скрестите пальцы и ждите чуда🤞🤞
+  **P.S сервер backend развёрнут на хостинге вот ссылка чтобы его потыкать: https://fastapi-test-kegi.onrender.com/docs**
 
 ## Стек технологий
 
